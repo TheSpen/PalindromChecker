@@ -1,0 +1,135 @@
+<html>
+    <head>
+        <title>Palindrome Checker</title>
+        <style>
+
+            body {
+                background-color: lightgray;
+            }
+            header {
+                font-family: Courier New, monospace;
+                color: rgb(255,255,111);
+                text-align: center;
+                -webkit-text-stroke: 1px black;
+                }
+            form {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                min-height: 50vh;
+                padding: 24px;
+                border: 1px solid black;
+            }
+            label {
+                display: block;
+            }
+            .boxText { 
+                width: 320px;
+                font-family: monospace;
+                left: 30%;
+             
+            }
+            .butt {
+                width: 240px;
+                font-family: monospace;
+            }
+
+            input {
+                display: block;
+                margin-top: 24px;
+            
+            }
+            [type="submit"] {
+                padding: 12px;
+                background-color: green;
+                border: 0;
+                color: white;
+                transition: background-color 0.5s, border-radius 0.3s;
+                cursor: pointer;
+             
+            }
+            [type="submit"]:hover {
+                background-color: rgb(204,204,0);
+                border-radius: 12px;
+            }
+            p {
+                font-size: 22px;
+                color: darkgray;
+                transition: font-size 2s, color 2s;
+                font-family: monospace;
+            }
+
+            p.is-palindrome {
+                font-size: 50px;
+                color: rgb(255,255,111);
+                font-family: monospace;
+                -webkit-text-stroke: 1px black;
+            }
+            .pic {
+                float: right;
+                width: 360px;
+                height: 360px;
+                position: absolute;
+                right: 20%;
+                box-shadow: 0 0 25px 25px white inset;
+                border-radius: 80%;
+            }
+
+            img:hover {
+                transform: scaleX(-1);
+                }
+            .question {
+                font-family: monospace;
+                color: rgb(255,255,111);
+                font-size: 16px;
+                -webkit-text-stroke: .75px black;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Palindrome Checker</h1>
+        </header>
+
+        <main>
+            <form id="form-1" method="post">
+                <label for="string" class="question">Type in below to discover if your word or phrase is a palindrome</label>
+                <img src="https://cdn11.bigcommerce.com/s-nq6l4syi/images/stencil/1280x1280/products/25375/82219/66075-1024__82659.1529585764.jpg?c=2?imbypass=on" id="img" alt="artistic spelling of 'palindrome'" class="pic">
+                <input id="string" class="boxText" type="text" name="string" placeholder="Yo, bozo boy!" />
+                <input type="submit" class="butt" value="Check" />
+            </form>
+            <p>Click on "Check" to find out</p>
+        </main>
+
+        <footer>
+        </footer>
+
+        <script>
+            const form = document.querySelector('form');
+            const stringInput = form.querySelector('input[name="string"]');
+            const message = document.querySelector('p');
+
+            function isPalindrome(str) {
+                const newStr = str.toLowerCase().split('')
+                const revStr = str.toLowerCase().split('').reverse()
+                const reGex = /[\s^_\\W]+/ig
+
+                return revStr.join('').match(reGex).join('') === newStr.join('').match(reGex).join('');
+            }
+
+            function handleSubmit(event) {
+                event.preventDefault();
+
+                if (isPalindrome(stringInput.value)) {
+                    message.textContent = 'Yes, "' + stringInput.value + '" is a palindrome';
+                    message.classList.add('is-palindrome');
+                } else {
+                    message.textContent = 'Sorry, but "' + stringInput.value + '" is not a palindrome';
+                    message.classList.remove('is-palindrome');
+                }
+            }
+
+            form.addEventListener('submit', handleSubmit);
+        </script>
+    </body>
+</html>
